@@ -5,6 +5,7 @@ author = "805104533@qq.com"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "A Tool for version control with multi git repo"
+homepage = "https://github.com/huang12zheng/git-explore"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

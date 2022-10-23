@@ -19,7 +19,7 @@ on:
     tags:
     - "v*"
 env:
-  BIN_NAME: cargo-release
+  BIN_NAME: git-explore
 jobs:
   create-release:
     name: create-release

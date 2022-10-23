@@ -24,7 +24,7 @@ pub fn push(opt: &PushOption) -> Result<()> {
 #[test]
 pub fn run_push() {
     use crate::*;
-    let cli = RepoCli::parse_from([KEY_COMMAND, "push", "-d", "d:\\rust\\backend\\sdk1018"]);
+    let cli = RepoCli::parse_from([KEY_COMMAND, "push", "-d", KEY_BASEPATH]);
     if let Some(Command::Push(mut opt)) = cli.command {
         push(&mut opt).unwrap();
     }

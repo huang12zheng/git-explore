@@ -24,7 +24,7 @@ pub fn pull(opt: &PushOption) -> Result<()> {
 #[test]
 pub fn run_pull() {
     use crate::*;
-    let cli = RepoCli::parse_from([KEY_COMMAND, "pull", "-d", "d:\\rust\\backend\\sdk1018"]);
+    let cli = RepoCli::parse_from([KEY_COMMAND, "pull", "-d", "d:\\rust\\sdk10212"]);
     if let Some(Command::Pull(mut opt)) = cli.command {
         pull(&mut opt).unwrap();
     }

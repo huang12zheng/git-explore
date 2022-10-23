@@ -33,7 +33,7 @@ pub fn find_git(opt: &ListOption) -> Result<Vec<PathBuf>> {
 fn search_git() {
     use crate::*;
     use clap::Parser;
-    let cli = RepoCli::parse_from([KEY_COMMAND, "list", "-d", "d:\\rust\\backend\\sdk1018"]);
+    let cli = RepoCli::parse_from([KEY_COMMAND, "list", "-d", KEY_BASEPATH]);
     // println!("cli: {:#?}", cli);
     let ret = if let Some(Command::List(opt)) = cli.command {
         find_git(&opt)

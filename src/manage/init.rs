@@ -72,7 +72,7 @@ pub fn get_max_version(cargo_repos: &[PathBuf]) -> Option<Version> {
 }
 #[test]
 fn run_init() {
-    let cli = RepoCli::parse_from([KEY_COMMAND, "init", "-d", "d:\\rust\\backend\\sdk1018"]);
+    let cli = RepoCli::parse_from([KEY_COMMAND, "init", "-d", KEY_BASEPATH]);
     // println!("cli: {:#?}", cli);
     if let Some(Command::Init(opt)) = cli.command {
         init(&opt).unwrap();

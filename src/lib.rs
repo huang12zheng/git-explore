@@ -22,3 +22,5 @@ pub use util::*;
 
 pub const KEY_CONFIG_PATH: &str = "git_explore.db";
 pub const KEY_COMMAND: &str = "git-explore";
+#[cfg(test)]
+pub const KEY_BASEPATH: &str = "d:\\rust\\sdk10212";

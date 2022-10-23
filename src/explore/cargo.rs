@@ -24,7 +24,7 @@ fn search_git() {
         "git-explore",
         "list",
         "-d",
-        "d:\\rust\\backend\\sdk1018",
+        KEY_BASEPATH,
         "-n",
         "Cargo.toml",
     ]);

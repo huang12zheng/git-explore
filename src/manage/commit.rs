@@ -77,7 +77,7 @@ pub fn tt() {
 }
 // #[test]
 // pub fn run_commit() {
-//     let cli = RepoCli::parse_from([KEY_COMMAND, "commit", "-d", "d:\\rust\\backend\\sdk1018"]);
+//     let cli = RepoCli::parse_from([KEY_COMMAND, "commit", "-d", KEY_BASEPATH]);
 //     if let Some(Command::Commit(mut opt)) = cli.command {
 //         commit(&mut opt).unwrap();
 //     }

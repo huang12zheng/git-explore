@@ -50,7 +50,7 @@ pub fn git_commit(version: &str, config: &Config) -> Result<()> {
             .current_dir(git)
             .args(vec!["commit", "-am", version])
             .spawn()
-            .expect(&format!("Failed to execute command git {}", git));
+            .expect(&format!("Failed to execute command git commit {}", git));
     });
     Ok(())
 }

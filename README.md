@@ -10,4 +10,6 @@ git-explore init
 > create a file git-explore.db with maxvalue of cargo.toml
 git-explore commit -d "d:\\rust\\backend\\sdk1018"
 > change version on git-explore.db and Cargo.toml
+git-explore pull
+git-explore push
 ```

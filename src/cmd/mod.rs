@@ -1,10 +1,14 @@
 mod commit;
 mod init;
 mod list;
+mod pull;
+mod push;
 use crate::*;
 pub use commit::*;
 pub use init::*;
 pub use list::*;
+pub use pull::*;
+pub use push::*;
 
 #[derive(Parser, Debug)]
 #[command(
@@ -28,4 +32,8 @@ pub enum Command {
     Init(InitOption),
     #[clap(visible_alias = "cv", about = "Set Version and commit")]
     Commit(CommitOpts),
+    #[clap(about = "git pull for repositories")]
+    Pull(PushOption),
+    #[clap(about = "git push for repositories")]
+    Push(PushOption),
 }

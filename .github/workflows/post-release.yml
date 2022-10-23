@@ -16,8 +16,8 @@
 name: post-release
 on:
   push:
-    tags:
-    - "v*"
+    # tags:
+    # - "v*"
 env:
   BIN_NAME: cargo-release
 jobs:

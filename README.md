@@ -1,6 +1,10 @@
 # Install
 `cargo install git-explore`
 
+or
+
+You can download from the url: [release](https://github.com/huang12zheng/git-explore/releases)
+
 # Usage
 ```
 #git-explore list -d KEY_BASEPATH

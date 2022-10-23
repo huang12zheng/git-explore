@@ -90,6 +90,7 @@ jobs:
         profile: minimal
         override: true
         target: ${{ matrix.target }}
+    - uses: Swatinem/rust-cache@v1
     - name: Build release binary
       run: cargo build --target ${{ matrix.target }} --verbose --release
     - name: Build archive

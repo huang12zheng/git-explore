@@ -41,7 +41,7 @@ pub enum FilterName {
 }
 
 pub fn run_list(opt: &ListOption) -> Result<()> {
-    let ret = find_git(&opt);
+    let ret = find_git(opt);
     println!("{:#?}", ret);
     Ok(())
 }

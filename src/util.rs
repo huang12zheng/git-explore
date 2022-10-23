@@ -12,7 +12,7 @@ pub trait PathEx {
 pub trait ToStringVec {
     fn to_string_vec(&self) -> Vec<String>;
 }
-fn to_string_vec(path_vec: &Vec<PathBuf>) -> Vec<String> {
+fn to_string_vec(path_vec: &[PathBuf]) -> Vec<String> {
     path_vec
         .iter()
         .map(|e| e.to_str().unwrap().to_owned())

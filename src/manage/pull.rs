@@ -8,7 +8,7 @@ pub fn git_pull(config: &Config) -> Result<()> {
             .current_dir(git)
             .args(vec!["pull"])
             .spawn()
-            .expect(&format!("Failed to execute command git pull {}", git));
+            .unwrap_or_else(|_| panic!("Failed to execute command git pull {}", git));
     });
     Ok(())
 }

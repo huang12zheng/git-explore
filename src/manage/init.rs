@@ -46,14 +46,13 @@ pub fn init(opt: &InitOption) -> std::result::Result<(), std::io::Error> {
         },
     };
     let pubspec_vec = find_file(&list_opts).unwrap();
-    let version = get_max_version(&cargo_vec).unwrap_or(Version::parse("0.0.1").unwrap());
+    let version = get_max_version(&cargo_vec).unwrap_or_else(|| Version::parse("0.0.1").unwrap());
     Config {
-        version: (&opt)
+        version: (opt)
             .version_opts
             .commit_version
             .to_owned()
-            .or(Some(version.to_string()))
-            .unwrap(),
+            .unwrap_or_else(|| version.to_string()),
         git_repos: git_vec.to_string_vec(),
         cargo_repos: cargo_vec.to_string_vec(),
         pubspec_repos: pubspec_vec.to_string_vec(),
@@ -61,7 +60,7 @@ pub fn init(opt: &InitOption) -> std::result::Result<(), std::io::Error> {
     .set(search_path)
 }
 
-pub fn get_max_version(cargo_repos: &Vec<PathBuf>) -> Option<Version> {
+pub fn get_max_version(cargo_repos: &[PathBuf]) -> Option<Version> {
     cargo_repos
         .iter()
         .map(|path| {

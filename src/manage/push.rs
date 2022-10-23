@@ -8,7 +8,7 @@ pub fn git_push(config: &Config) -> Result<()> {
             .current_dir(git)
             .args(vec!["push"])
             .spawn()
-            .expect(&format!("Failed to execute command git push {}", git));
+            .unwrap_or_else(|_| panic!("Failed to execute command git push {}", git));
     });
     Ok(())
 }

@@ -32,7 +32,7 @@ pub fn sed_pubspec(version: &str, config: &Config) -> Result<()> {
 
     sed(paths, binding.as_str())
 }
-pub fn sed(paths: &Vec<String>, binding: &str) -> Result<()> {
+pub fn sed(paths: &[String], binding: &str) -> Result<()> {
     let cmd = ReplaceCommand::new(binding).unwrap();
     paths.iter().for_each(|path| {
         let file_path = path.to_path();
@@ -50,7 +50,7 @@ pub fn git_commit(version: &str, config: &Config) -> Result<()> {
             .current_dir(git)
             .args(vec!["commit", "-am", version])
             .spawn()
-            .expect(&format!("Failed to execute command git commit {}", git));
+            .unwrap_or_else(|_| panic!("Failed to execute command git commit {}", git));
     });
     Ok(())
 }

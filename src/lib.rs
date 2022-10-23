@@ -9,7 +9,6 @@ pub(crate) use chrono::{DateTime, NaiveDateTime, Utc};
 pub(crate) use git2::Repository;
 pub(crate) use sedregex::ReplaceCommand;
 use std::time::SystemTime;
-pub(crate) use toml;
 
 mod cmd;
 mod err;

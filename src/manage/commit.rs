@@ -1,22 +1,30 @@
 use std::process;
 
+// use anyhow::Ok;
+
 use crate::*;
 /// config new version on VersionOpts and tmp Config.
-pub fn get_version(opt: &VersonOpts, config: &mut Config) -> Result<()> {
-    let version = match opt.commit_version.to_owned() {
-        Some(version) => version,
-        None => {
-            let mut version = Version::parse(&config.version).unwrap();
-            match opt.kind {
-                CommitKind::Patch => version.patch += 1,
-                CommitKind::Minor => version.minor += 1,
-                CommitKind::Major => version.major += 1,
-            };
-            version.to_string()
-        }
-    };
+pub fn get_version(opt: &MessageOpts, config: &mut Config) -> Result<()> {
+    // Get the version if message it is, or to be None
+    let version = opt.commit_message.to_owned().filter(|m| m.starts_with("v"));
 
+    let version = version.unwrap_or_else(|| {
+        let mut version = Version::parse(&config.version).unwrap();
+        match opt.kind {
+            CommitVersionKind::Patch => version.patch += 1,
+            CommitVersionKind::Minor => version.minor += 1,
+            CommitVersionKind::Major => version.major += 1,
+        };
+        version.to_string()
+    });
     config.version = version;
+
+    Ok(())
+}
+pub fn get_message(opt: &mut MessageOpts, config: &Config) -> Result<()> {
+    let mut binding = opt.commit_message.to_owned();
+    let m = binding.get_or_insert(config.version.clone());
+    opt.commit_message = Some(m.to_owned());
 
     Ok(())
 }
@@ -44,11 +52,11 @@ pub fn sed(paths: &[String], binding: &str) -> Result<()> {
     });
     Ok(())
 }
-pub fn git_commit(version: &str, config: &Config) -> Result<()> {
+pub fn git_commit(commit_message: &str, config: &Config) -> Result<()> {
     config.git_repos.iter().for_each(|git| {
         process::Command::new("git")
             .current_dir(git)
-            .args(vec!["commit", "-am", version])
+            .args(vec!["commit", "-am", commit_message])
             .spawn()
             .unwrap_or_else(|_| panic!("Failed to execute command git commit {}", git));
     });
@@ -57,12 +65,15 @@ pub fn git_commit(version: &str, config: &Config) -> Result<()> {
 pub fn commit(opt: &mut CommitOpts) -> Result<()> {
     let mut config = Config::get(opt.base.base_dir.to_config_path().to_str().unwrap());
 
-    get_version(&opt.version_opts, &mut config).unwrap();
-    let version = &config.version;
-    sed_cargo(version, &config).unwrap();
-    sed_pubspec(version, &config).unwrap();
-    config.set(opt.base.base_dir.to_config_path()).unwrap();
-    git_commit(version, &config).unwrap();
+    get_version(&opt.message_opts, &mut config).unwrap();
+    get_message(&mut opt.message_opts, &config).unwrap();
+    let commit_message = &opt.message_opts.commit_message.to_owned().unwrap();
+    if commit_message.starts_with("v") {
+        sed_cargo(commit_message, &config).unwrap();
+        sed_pubspec(commit_message, &config).unwrap();
+        config.set(opt.base.base_dir.to_config_path()).unwrap();
+    }
+    git_commit(commit_message, &config).unwrap();
 
     Ok(())
 }

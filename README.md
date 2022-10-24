@@ -14,6 +14,8 @@ git-explore init
 > create a file git-explore.db with maxvalue of cargo.toml
 git-explore commit -d KEY_BASEPATH
 > change version on git-explore.db and Cargo.toml
+git-explore commit -cm "message"
+> commit message and don't update version if message not start with "v"
 git-explore pull
 git-explore push
 ```

@@ -49,7 +49,6 @@ pub fn init(opt: &InitOption) -> std::result::Result<(), std::io::Error> {
     let version = get_max_version(&cargo_vec).unwrap_or_else(|| Version::parse("0.0.1").unwrap());
     Config {
         version: (opt)
-            .version_opts
             .commit_version
             .to_owned()
             .unwrap_or_else(|| version.to_string()),

@@ -3,6 +3,6 @@ use crate::*;
 pub struct InitOption {
     #[clap(flatten)]
     pub base: BaseOptions,
-    #[clap(flatten)]
-    pub version_opts: VersonOpts,
+    #[clap(long = "cv")]
+    pub commit_version: Option<String>,
 }

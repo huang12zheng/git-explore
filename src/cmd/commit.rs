@@ -1,13 +1,13 @@
 use crate::*;
 #[derive(Parser, Debug, Clone)]
-pub struct VersonOpts {
-    #[clap(long = "cv")]
-    pub commit_version: Option<String>,
-    #[clap(value_enum,short = 'k',default_value_t = CommitKind::Patch)]
-    pub kind: CommitKind,
+pub struct MessageOpts {
+    #[clap(long = "cm")]
+    pub commit_message: Option<String>,
+    #[clap(value_enum,short = 'k',default_value_t = CommitVersionKind::Patch)]
+    pub kind: CommitVersionKind,
 }
 #[derive(clap::ValueEnum, Clone, Debug)]
-pub enum CommitKind {
+pub enum CommitVersionKind {
     Patch,
     Minor,
     Major,
@@ -17,7 +17,7 @@ pub struct CommitOpts {
     #[clap(flatten)]
     pub base: BaseOptions,
     #[clap(flatten)]
-    pub version_opts: VersonOpts,
+    pub message_opts: MessageOpts,
     #[clap(skip)]
     pub config: Option<Config>,
 }
